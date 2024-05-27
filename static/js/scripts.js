@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data) {
             messageElement.dataset.value = data;
             messageElement.classList.add('clickable');
-            messageElement.addEventListener('click', () => handleMessage(data));
+            messageElement.addEventListener('click', () => handleMessage(data, message));
         }
         messages.appendChild(messageElement);
         messages.scrollTop = messages.scrollHeight;
@@ -50,16 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    function handleMessage(message) {
-        if (message.toLowerCase() === 'menu') {
+    function handleMessage(data, message = null) {
+        if (message) {
+            appendMessage(`${message}`, 'user');
+        }
+        if (data.toLowerCase() === 'menu') {
             websocket.send('');
-        } else if (message.toLowerCase() === 'back') {
+        } else if (data.toLowerCase() === 'back') {
             const currentExchange = document.querySelector('.current-exchange');
             if (currentExchange) {
                 websocket.send(currentExchange.textContent);
             }
         } else {
-            websocket.send(message);
+            websocket.send(data);
         }
     }
 
