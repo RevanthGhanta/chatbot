@@ -5,10 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input');
     const sendButton = document.getElementById('send');
 
-    function appendMessage(message, type = 'message') {
+    function appendMessage(message, type = 'message', data = null) {
         const messageElement = document.createElement('div');
         messageElement.className = type;
         messageElement.textContent = message;
+        if (data) {
+            messageElement.dataset.value = data;
+            messageElement.classList.add('clickable');
+            messageElement.addEventListener('click', () => handleMessage(data));
+        }
         messages.appendChild(messageElement);
         messages.scrollTop = messages.scrollHeight;
     }
@@ -16,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function showExchanges(exchanges) {
         appendMessage('Select an exchange:', 'system');
         exchanges.forEach(exchange => {
-            appendMessage(`${exchange.code}: ${exchange.name}`, 'system');
+            appendMessage(`${exchange.code}: ${exchange.name}`, 'system', exchange.code);
         });
     }
 
     function showStocks(stocks) {
         appendMessage('Select a stock:', 'system');
         stocks.forEach(stock => {
-            appendMessage(`${stock.code}: ${stock.stockName}`, 'system');
+            appendMessage(`${stock.code}: ${stock.stockName}`, 'system', stock.code);
         });
     }
 

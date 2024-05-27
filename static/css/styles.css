@@ -43,3 +43,16 @@ body {
     text-align: left;
     color: #333;
 }
+
+.clickable {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.clickable:hover {
+    text-decoration: underline;
+}
+
+#input-container {
+    padding: 10px;
+}

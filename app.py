@@ -1,8 +1,13 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 import json
+import os
 
 app = FastAPI()
+
+# Mount the static files directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Load stock data from JSON file
 with open('stock_data.json', 'r') as f:
