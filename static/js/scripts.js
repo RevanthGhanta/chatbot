@@ -35,18 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPrice(stock, price) {
         appendMessage(`The current price of ${stock} is ${price}`, 'system');
         const backButton = document.createElement('button');
+        backButton.classList.add("back-button");
         backButton.textContent = 'Back';
-        backButton.addEventListener('click', () => websocket.send('back'));
+        backButton.addEventListener('click', () => handleMessage('back'));
+        messages.appendChild(backButton);
+
         const menuButton = document.createElement('button');
+        menuButton.classList.add("menu-button");
         menuButton.textContent = 'Menu';
-        menuButton.addEventListener('click', () => websocket.send(''));
-        const buttonContainer = document.createElement('div');
-        buttonContainer.appendChild(backButton);
-        buttonContainer.appendChild(menuButton);
-        const messageElement = document.createElement('div');
-        messageElement.appendChild(document.createTextNode('Type "menu" to go to the main menu or "back" to return to the stock list.'));
-        messageElement.appendChild(buttonContainer);
-        appendMessage(messageElement, 'system');
+        menuButton.addEventListener('click', () => handleMessage('menu'));
+        messages.appendChild(menuButton);
     }
 
     websocket.onmessage = function(event) {
@@ -64,15 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMessage(data, message = null) {
         if (message) {
-            appendMessage(`You selected: ${message}`, 'user');
+            appendMessage(`${message}`, 'user');
         }
         if (data.toLowerCase() === 'menu') {
-            websocket.send('');
+            websocket.send('menu');
         } else if (data.toLowerCase() === 'back') {
-            const currentExchange = document.querySelector('.current-exchange');
-            if (currentExchange) {
-                websocket.send(currentExchange.textContent);
-            }
+            websocket.send('back');
         } else {
             websocket.send(data);
         }

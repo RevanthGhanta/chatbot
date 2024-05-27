@@ -7,27 +7,27 @@ This is a simple chatbot that allows users to select a stock exchange and view t
 
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
-    cd chatbot
+    `git clone https://github.com/RevanthGhanta/chatbot.git`
+    `cd chatbot`
     ```
 
 2. Create and activate a virtual environment:
     ```sh
-    python -m venv venv
-    source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+    `python -m venv venv`
+    `venv\Scripts\activate`
     ```
 
 3. Install the dependencies:
     ```sh
-    pip install -r requirements.txt
+    `pip install -r requirements.txt`
     ```
 
 4. Run the FastAPI application:
     ```sh
-    uvicorn app:app --reload
+    `uvicorn app:app --reload --port 8001`
     ```
 
-5. Open your web browser and go to `http://localhost:8000` to interact with the chatbot.
+5. Open your web browser and go to `http://localhost:8001` to interact with the chatbot.
 
 ## Features
 - Upon loading, it greets the user and provides a list of stock exchanges.
@@ -36,9 +36,3 @@ This is a simple chatbot that allows users to select a stock exchange and view t
 - Users can either type or select a stock from the list displayed.
 - Upon selecting a stock, it shows the current price and options to go back to the main menu or stock list.
 - Basic error handling and user-friendly interface.
-
-## Optional Enhancements
-- Add error handling for invalid inputs.
-- Implement user authentication.
-- Store user preferences and chat history.
-- Optimize for performance and scalability.
