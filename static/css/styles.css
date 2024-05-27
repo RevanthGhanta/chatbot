@@ -45,16 +45,22 @@ body {
 
 .message {
     margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+    word-wrap: break-word;
 }
 
 .user {
+    background-color: #dcf8c6;
+    align-self: flex-end;
     text-align: right;
-    color: #007bff;
 }
 
 .system {
+    background-color: #ffffff;
+    align-self: flex-start;
     text-align: left;
-    color: #333;
 }
 
 .clickable {

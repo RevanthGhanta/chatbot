@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input');
     const sendButton = document.getElementById('send');
 
-    function appendMessage(message, type = 'message', data = null) {
+    function appendMessage(message, type = 'system', data = null) {
         const messageElement = document.createElement('div');
-        messageElement.className = type;
+        messageElement.className = `message ${type}`;
         messageElement.textContent = message;
         if (data) {
             messageElement.dataset.value = data;
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMessage(data, message = null) {
         if (message) {
-            appendMessage(`${message}`, 'user');
+            appendMessage(`You selected: ${message}`, 'user');
         }
         if (data.toLowerCase() === 'menu') {
             websocket.send('');
