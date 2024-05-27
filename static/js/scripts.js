@@ -34,7 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showPrice(stock, price) {
         appendMessage(`The current price of ${stock} is ${price}`, 'system');
-        appendMessage('Type "menu" to go to the main menu or "back" to return to the stock list.', 'system');
+        const backButton = document.createElement('button');
+        backButton.textContent = 'Back';
+        backButton.addEventListener('click', () => websocket.send('back'));
+        const menuButton = document.createElement('button');
+        menuButton.textContent = 'Menu';
+        menuButton.addEventListener('click', () => websocket.send(''));
+        const buttonContainer = document.createElement('div');
+        buttonContainer.appendChild(backButton);
+        buttonContainer.appendChild(menuButton);
+        const messageElement = document.createElement('div');
+        messageElement.appendChild(document.createTextNode('Type "menu" to go to the main menu or "back" to return to the stock list.'));
+        messageElement.appendChild(buttonContainer);
+        appendMessage(messageElement, 'system');
     }
 
     websocket.onmessage = function(event) {
